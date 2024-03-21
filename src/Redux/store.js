@@ -19,9 +19,8 @@ const store = configureStore({
       allProjects.middleware,
       allOffers.middleware,
       allUsers.middleware
-    ), // Add both RTK Query middlewares in an array
+    ),
 });
 
-setupListeners(store); // Attach listeners
-
+setupListeners(store.dispatch)
 export default store;

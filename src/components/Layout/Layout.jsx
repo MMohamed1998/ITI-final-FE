@@ -8,11 +8,45 @@ function Layout({ userData, setUserData }) {
   const [loading, setLoading] = useState(true);
 
   // Log out function
+  useEffect(() => {
+    // Function to check token expiration
+    const checkTokenExpiration = () => {
+        // Retrieve token from local storage
+        const token = localStorage.getItem('token');
+  
+        // Check if token exists
+        if (token) {
+            // Parse token to extract expiration time
+            const tokenData = JSON.parse(atob(token.split('.')[1])); // Decoding base64 token
+            const expirationTime = tokenData.exp * 1000; // Convert expiration time to milliseconds
+  
+            // Get current time
+            const currentTime = new Date().getTime();
+  
+            // Check if token has expired
+            if (currentTime > expirationTime) {
+                // Token has expired, remove it from local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('userData');
+                console.log('Expired token removed.');
+                nav('/login');
+            } else {
+                console.log('Token is still valid.');
+            }
+        } else {
+            console.log('Token not found in local storage.');
+            nav('/login');
+        }
+    };
+  
+    // Call the function to check token expiration
+    checkTokenExpiration();
+  }, []);
 
   async function logOut() {
     try {
         const token = localStorage.getItem("token");
-        await axios.post('https://iti-final-be.onrender.com/auth/logout', {}, {
+        await axios.post('http://localhost:3000/auth/logout', {}, {
             headers: {
                 Authorization: `FINALITI__${token}`
             }

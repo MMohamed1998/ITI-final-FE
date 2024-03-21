@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import bed1Img from "../../public/images/Screenshot 2024-02-26 114143.png";
 import { addToScene } from "../Redux/slices/modelSlice";

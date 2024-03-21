@@ -41,18 +41,18 @@ function Project({ data }) {
       <div className={`${styles.showbox}`}>
         <div className={`${styles.content}`}>
           <div className="d-flex justify-content-between">
-            <h4 onClick={goToProjectDetails} className={`${styles.projectTitle}`}>{getTitle(data.title)}</h4>
+            <h4 onClick={goToProjectDetails} className={`${styles.projectTitle}`}>{getTitle(data?.title)}</h4>
             <div className={`${styles.title}`}>
               <button onClick={addOffer} className={`${styles.addOffer}`}> Add Offer </button>
             </div>
           </div>
           <p>
-            <img className={`${styles.userImage} me-2`} src={"https://iti-final-be.onrender.com/" + data.createdBy?.image} alt="" />
-            {data.createdBy?.firstName}
+            <img className={`${styles.userImage} me-2`} src={"http://localhost:3000/" + data?.createdBy?.image} alt="" />
+            {data?.createdBy?.firstName}
             <i className="fa-regular fa-clock  mx-2"></i>{time}
             <i className="fa-solid fa-marker mx-2 "></i>{data.offer?.length} offers
           </p>
-          <p>{getDesc(data.description)}</p>
+          <p>{getDesc(data?.description)}</p>
         </div>
       </div>
     </div>

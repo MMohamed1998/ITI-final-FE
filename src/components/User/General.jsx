@@ -1,25 +1,25 @@
 import React from 'react'
-import profimg from '../../assets/images/designerprofile.jpg';
+import profimg from '../../../public/images/team/Masoud.jpg';
 function General() {
   return (
     <>
       
       <div className="contain active show" id="account-general">
-       <div className="card-body media align-items-center">
+       <div className="card-body media align-items-center m-2 ">
     
-              <img src={profimg} alt='no image' className="d-block ui-w-80 " />
-              <div className="media-body ml-4">
+    <button type="file" className='border-0 bg-muted d-flex user_image'>
+    <img src={profimg} alt='no image'  className="w-25 " />
+
+    </button>
+              {/* <div className="media-body ml-4">
                 <label className="btn btn-outline-primary addimgbtn">
-                <h3 className='plusbtn'> <i className="fa-solid fa-plus "></i></h3>
+                 <i className="fa-solid fa-plus "></i>
                   <input type="file" className="account-settings-fileinput"  placeholder='+' />
                 </label> &nbsp;
-                <button type="button" className="btn btn-default md-btn-flat">Reset</button>
-                {/* <div className="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div> */}
                 
-              </div>
+              </div> */}
               
             </div>
-             {/* <hr className="border-light m-0" /> */}
              
              <div className="card-body body-card">
               <div className="form-group first">

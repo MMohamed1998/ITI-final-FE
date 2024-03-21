@@ -4,19 +4,20 @@ import { useLocation, useParams } from 'react-router-dom';
 import user from '../../../public/images/man-300x300.png'
 import AddOffer from '../../components/AddOffer/AddOfer';
 import Offers from '../Offers/Offers';
-import Offer from '../Offer/Offer';
 import {  useProjectDetailsQuery } from '../../services/api';
 import { useEffect } from 'react';
 import { useAddOfferMutation } from '../../services/offer';
 function Project_Details() {
     let total = 0;
-
+    const userRole=JSON.parse(localStorage.getItem('userData')).role;
     const loc = useLocation();
     console.log(loc.state._id);
 
     const { data, isFetching } = useProjectDetailsQuery(loc.state._id);
   const [addOffer, { isLoading, isError, isSuccess }] = useAddOfferMutation();
-
+    console.log(isLoading)
+    console.log(isError)
+    console.log(isSuccess)
 
   useEffect(()=>{
     console.log(addOffer)
@@ -26,7 +27,10 @@ function Project_Details() {
     
     // Return loading indicator if data is fetching
     if (isFetching) {
-        return <div>Loading...</div>;
+        return <div><div id="loading-wrapper">
+        <div id="loading-text">LOADING</div>
+        <div id="loading-content"></div>
+      </div></div>;
     }
 
     // Return an error message if data is still undefined
@@ -49,10 +53,12 @@ function Project_Details() {
 
     return (
         <>
-            <div className="container">
+        <div className={` ${styles.project_d_bg}`}>
+        <div className={` ${styles.project_d_layer}`}>
+        <div className="container ">
                 <div className="row">
-                    <div className={`${styles.title_add} mt-5`}>
-                        <h4>{projectdetails.title}</h4>
+                    <div className={`m-auto  ${styles.title_add } text-white  mt-5 `}>
+                        <h4 className=' m-auto p-2'>{projectdetails.title}</h4>
                     </div>
                     <div className="col lg-8">
 
@@ -77,7 +83,7 @@ function Project_Details() {
                             <div className={`${styles.card_content} container`}>
                                 <div className="d-flex justify-content-between pt-2">
                                     <p>Project status</p>
-                                    {projectdetails.status == "open" ? <p className='bg-success rounded-2 px-1 text-white ms-auto'>{projectdetails.status}</p> : <p className='pg-danger rounded-2 px-1 text-white ms-auto'>{projectdetails.status}</p>}
+                                    {projectdetails.status == "closed" ? <p className='bg-danger rounded-2 px-1 text-white ms-auto'>{projectdetails.status}</p> : <p className='bg-success rounded-2 px-1 text-white ms-auto'>{projectdetails.status}</p>}
                                 </div>
                                 <div className="d-flex justify-content-between  ">
                                     <p>Pate of publication</p>
@@ -121,7 +127,7 @@ function Project_Details() {
                                 <div className=" ">
                                     <p>Project Owner</p>
                                     <div className="d-flex align-content-center">
-                                        <img className={`${styles.userImage} me-4`} src={"https://iti-final-be.onrender.com/" + projectdetails.createdBy.image} alt={projectdetails.userName} />
+                                        <img className={`${styles.userImage} me-4`} src={"http://localhost:3000/" + projectdetails.createdBy.image} alt={projectdetails.userName} />
                                         <div className="">
                                             <h6>{projectdetails.createdBy.userName}</h6>
                                             <p><i className="fa-solid fa-briefcase me-2"></i> 3d designer</p>
@@ -135,13 +141,13 @@ function Project_Details() {
                 <div className={`${styles.addOffer1} `}>
                     <div className={`row mt-2`}>
                         <div className="col-lg-8">
-                            <div className={`${styles.addOffer} `}>
+                            {userRole=="Designer"?<div className={`${styles.addOffer} `}>
                                 <p className='ps-3 pt-3'>Add  Offer Now</p>
                                 <span></span>
                                 <div className='ps-3 py-3'>
                                     <AddOffer data={projectdetails._id} />
                                 </div>
-                            </div>
+                            </div>:''}
                             <div className={`my-3 ${styles.All_Offers}`}>
                                 <p className='ps-3 pt-3'>All Project Offers</p>
                                 <span></span>
@@ -159,6 +165,9 @@ function Project_Details() {
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+            
         </>
     )
 }

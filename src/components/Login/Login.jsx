@@ -26,7 +26,7 @@ function Login({ saveUser }) {
         // Make a POST request to your login endpoint
 
   
-        let { data } = await axios.post('https://iti-final-be.onrender.com/auth/login', values).catch((err) => {
+        let { data } = await axios.post('http://localhost:3000/auth/login', values).catch((err) => {
 
             setError(err.response.data.msgError)
             setLoading(false)
@@ -41,7 +41,7 @@ function Login({ saveUser }) {
                     firstName: data.user.firstName,
                     lastName: data.user.lastName,
                     userName: data.user.userName,
-                    image: "https://iti-final-be.onrender.com/" + data.user.image,
+                    image: "http://localhost:3000/" + data.user.image,
                     userId: data.user._id,
                     role: data.user.role,
                 }))

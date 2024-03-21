@@ -24,12 +24,15 @@ function Offers({ projectId }) {
 
   return (
     <>
-      {offers.length > 0 &&
+      {offers.length > 0 ? (
         offers.map((item) => (
           <div key={item._id}>
             <Offer data={item} />
           </div>
-        ))}
+        ))
+      ) : (
+        <p className='p-3'>NO OFFERS FOUND</p>
+      )}
     </>
   );
 }

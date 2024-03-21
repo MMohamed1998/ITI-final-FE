@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAddProjectMutation,useGetProjectsQuery,useUpdateProjectMutation } from '../../services/api';
+import { useAddProjectMutation} from '../../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { useNavigate } from 'react-router-dom';
 import Projects from '../Projects/Projects';
 import styles from './AddProject.module.css'
+import { ToastContainer, toast } from 'react-toastify';
+
+  import 'react-toastify/dist/ReactToastify.css';
 
 function AddProject() {
   const nav = useNavigate();
+  const [showmodel,setShowmodel]=useState(true)
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [skills, setSkills] = useState(["Unity", "Blender", "React", "Node.js", "Python", "Java", "HTML", "CSS", "JavaScript", "SQL"]); // Initial options for skills
   const [selectedSkills, setSelectedSkills] = useState([]); // State to hold selected skills
-  const [addProject, { isLoading, isError}] = useAddProjectMutation();
+  const [addProject, { isLoading, isError,error}] = useAddProjectMutation();
 
-
+  console.log(error)
   const onSubmit = async (data) => {
     try {
       data.skills = selectedSkills;
       const response = await addProject(data);
       console.log('Project added successfully:', response);
+      if(response.data.success) {
+        setShowmodel(false)
+        console.log("first")
+        toast.success("Success Notification !")
       reset();
+
+      }
     } catch (error) {
       console.error('Error adding project:', error);
     }
@@ -34,7 +44,16 @@ function AddProject() {
   };
 
   return (
-    <div className="container">
+
+    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className={`modal-dialog modal-L ${styles.add_Project}`}>
+    <div className={`modal-content ${styles.add_Project}`}>
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Add Project</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+      <div className="container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <input {...register("title", { required: true, minLength: 25 })} className="form-control p-2" placeholder="inter project realated title" />
@@ -94,10 +113,16 @@ function AddProject() {
       </form>
       {isError && (
         <div className="alert alert-danger mt-3" role="alert">
-          Error adding project. Please try again.
+          {error.data.msgError}
         </div>
       )}
     </div>
+      </div>
+      
+    </div>
+  </div>
+</div> 
+    
   );
 }
 

@@ -27,12 +27,21 @@ export const allUsers = createApi({
     tagTypes: ['Users'],
     endpoints: (builder) => ({
         userProfile: builder.query({
-            query: (userId) => createRequest(`user/userProfile/${userId}`, 'GET'),
+            query: () => createRequest(`user/userProfile/`, 'GET'),
             providesTags:['Users']
         }),
+        userProfileId: builder.query({
+            query: (userId) => {
+                const url = userId ? `user/userProfile/${userId}` : 'user/userProfile';
+                return createRequest(url, 'GET');
+            },
+            providesTags:['Users']
+        }),
+        
     }),
 });
 
 export const {
     useUserProfileQuery,
+    useUserProfileIdQuery
 } = allUsers;
