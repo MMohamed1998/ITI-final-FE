@@ -47,11 +47,13 @@ function Login({ saveUser }) {
                 }))
             saveUser()
             if (loc.state) {
+                window.location.reload();
                 nav(loc.state);
                 setLoading(false)
 
             }
             else
+            window.location.reload();
                 nav('/');
             setLoading(false)
         }

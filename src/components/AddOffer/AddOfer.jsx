@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import styles from './AddOfer.module.css'
 import { useAddOfferMutation } from '../../services/offer';
-import { useGetProjectsQuery, useProjectDetailsQuery } from '../../services/api';
+import {useProjectDetailsQuery } from '../../services/api';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 function AddOffer({ data, onOfferAdded }) {

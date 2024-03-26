@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useGetProjectOffersQuery } from '../../services/offer';
-import UserProjectsOffer from '../Offer copy/UserProjectsOffer';
+import UserProjectsOffer from '../UserProjectsOffer/UserProjectsOffer';
 
 function UserProjectsOffers({ projectId }) {
   console.log(projectId)

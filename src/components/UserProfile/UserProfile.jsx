@@ -6,12 +6,13 @@ import { NavLink, Outlet } from "react-router-dom";
 
 function UserProfile() {
   // Fetch user profile data
-  const { data, error, isLoading } = useUserProfileIdQuery(); // Replace "userId" with the actual user ID
+  const { data, error, isLoading,refetch } = useUserProfileIdQuery(); // Replace "userId" with the actual user ID
 
   // Log data in console
   useEffect(() => {
     if (data) {
       console.log("User Profile Data:", data.data);
+      refetch()
     }
     if (error) {
       console.error("Error fetching user profile:", error);

@@ -3,25 +3,25 @@ import { useUserProfileIdQuery, useUserProfileQuery } from "../../services/user"
 import styles from './UserProfile.module.css'
 
 function AboutUser() {
-    const { data, error, isLoading } = useUserProfileQuery(); // Replace "userId" with the actual user ID
-    const { data:userData, error:userError, isLoading:userLoading } = useUserProfileIdQuery(); // Replace "userId" with the actual user ID
+    const { data, error, isLoading ,refetch} = useUserProfileIdQuery();
     const rate = 0
     // Log data in console
-    console.log(userData)
+    console.log(data)
     useEffect(() => {
-        if (userData) {
-            console.log("about user Data:", userData.data);
+        if (data) {
+            console.log("about user Data:", data.data);
+            refetch()
         }
         if (error) {
             console.error("Error fetching user profile:", error);
         }
-    }, [userData, error]);
+    }, [data, error]);
 
     if (isLoading) return <div id="loading-wrapper">
         <div id="loading-text">LOADING</div>
         <div id="loading-content"></div>
     </div>;
-    const date = new Date(userData?.data.createdAt);
+    const date = new Date(data?.data.createdAt);
     const options = { day: '2-digit', month: '2-digit',year:'numeric' };
   const formattedDate = date.toLocaleDateString('en-GB', options);
     console.log(formattedDate)
@@ -34,12 +34,12 @@ function AboutUser() {
                         <div className={` rounded-3  ${styles.about_user}`}>
                             <h5 className="ps-3 pt-3 mb-0">About Me</h5>
                             <span className={`${styles.span}`}></span>
-                            <p className="text-dark pe-5 p-3">{userData?.data.about}</p>
+                            <p className="text-dark pe-5 p-3">{data?.data.about}</p>
                         </div>
                         <div className={` rounded-3 ${styles.about_user}`}>
                             <h5 className="ps-3 pt-3 mb-0">Skills</h5>
                             <span className={`${styles.span}`}></span>
-                            <p className="py-3">{userData?.data?.skills?.map((item, indx) => {
+                            <p className="py-3">{data?.data?.skills?.map((item, indx) => {
                                 return <div key={indx} className={`btn  ms-2 me-2 mt-2 ${styles.project_skills}`}><i className="fa-brands fa-unity"></i> {item}</div>
                             })}</p>
                         </div>
@@ -51,12 +51,12 @@ function AboutUser() {
                             <div className="row pe-5 pt-3 ps-3 d-flex justify-content-between align-items-center">
                                 <h6 className="text-dark col-8 ">Ratings</h6>
                                 <p className="text-dark col-4 ps-0">
-                                    <i className={`fa-solid fa-star ${userData?.data?.rate >= 1 ? 'text-warning' : 'text-muted'}`}></i>
-                                    <i className={`fa-solid fa-star ${userData?.data?.rate >= 2 ? 'text-warning' : 'text-muted'}`}></i>
-                                    <i className={`fa-solid fa-star ${userData?.data?.rate >= 3 ? 'text-warning' : 'text-muted'}`}></i>
-                                    <i className={`fa-solid fa-star ${userData?.data?.rate >= 4 ? 'text-warning' : 'text-muted'}`}></i>
-                                    <i className={`fa-solid fa-star me-2 ${userData?.data?.rate >= 5 ? 'text-warning' : 'text-muted'}`}></i>
-                                    ({userData?.data?.rate || rate})
+                                    <i className={`fa-solid fa-star ${data?.data?.rate >= 1 ? 'text-warning' : 'text-muted'}`}></i>
+                                    <i className={`fa-solid fa-star ${data?.data?.rate >= 2 ? 'text-warning' : 'text-muted'}`}></i>
+                                    <i className={`fa-solid fa-star ${data?.data?.rate >= 3 ? 'text-warning' : 'text-muted'}`}></i>
+                                    <i className={`fa-solid fa-star ${data?.data?.rate >= 4 ? 'text-warning' : 'text-muted'}`}></i>
+                                    <i className={`fa-solid fa-star me-2 ${data?.data?.rate >= 5 ? 'text-warning' : 'text-muted'}`}></i>
+                                    ({data?.data?.rate || rate})
                                 </p>
                             </div>
                             <div className="row pe-5 ps-3 d-flex justify-content-between align-items-center">

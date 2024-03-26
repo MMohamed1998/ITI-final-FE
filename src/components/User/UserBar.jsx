@@ -19,7 +19,6 @@ function UserBar() {
           <NavLink className="list-group-item list-group-item-action active" data-toggle="list" to="general">{isCollapsed?<i className="fa-solid fa-user"></i>:"General"}</NavLink>
           <NavLink className="list-group-item list-group-item-action " data-toggle="list" to="changepass">{isCollapsed?<i className="fa-solid fa-key"></i>:"Change password"}</NavLink>
           <NavLink className="list-group-item list-group-item-action " data-toggle="list" to="info">{isCollapsed?<i className="fa-regular fa-address-card "></i>:"Information"} </NavLink>
-          <NavLink className="list-group-item list-group-item-action " data-toggle="list" to="social">{isCollapsed?<i className="fa-solid fa-share-from-square"></i>:"Social links"} </NavLink>
           <NavLink className="list-group-item list-group-item-action " data-toggle="list" to="connection">{isCollapsed?<i className="fa-solid fa-paperclip"></i>:"Connections"} </NavLink>
           <NavLink className="list-group-item list-group-item-action " data-toggle="list" to="gallary">{isCollapsed?<i className="fa-solid fa-image"></i>:"Gallary"} </NavLink>
         </div>

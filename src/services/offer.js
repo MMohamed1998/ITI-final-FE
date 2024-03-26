@@ -41,6 +41,14 @@ export const allOffers = createApi({
             query: ({ offerId, updatedData }) => createRequest(`/offer/updateOffer/${offerId}`, 'PUT', updatedData),
             invalidatesTags: ['Offers']
         }),
+        getDesignerOffers: builder.query({
+            query: () => createRequest('/offer/usersOffers', 'GET'),
+            providesTags:['Offers']
+        }),
+        getOneOffer: builder.query({
+            query: (offerId) => createRequest(`/offer/oneOffer/${offerId}`, 'GET'),
+            providesTags:['Offers']
+        }),
     }),
 });
 
@@ -49,4 +57,6 @@ export const {
     useGetProjectOffersQuery,
     useAddOfferMutation,
     useUpdateOfferMutation,
+    useGetDesignerOffersQuery,
+    useGetOneOfferQuery,
 } = allOffers;

@@ -74,3 +74,11 @@
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+.designer_offres{
+    background-color: rgba(248, 247, 246, 0.725);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}

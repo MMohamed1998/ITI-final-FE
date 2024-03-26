@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function Layout({ userData, setUserData }) {
   const nav = useNavigate();
@@ -80,6 +81,8 @@ useEffect(() => {
       <>
       <Navbar userData={userData} logOut={logOut} />
       <Outlet />
+      <Toaster/>
+      
       </>
       )}
     </>

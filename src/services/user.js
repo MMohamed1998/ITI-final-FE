@@ -28,20 +28,24 @@ export const allUsers = createApi({
     endpoints: (builder) => ({
         userProfile: builder.query({
             query: () => createRequest(`user/userProfile/`, 'GET'),
-            providesTags:['Users']
+            providesTags: ['Users']
         }),
         userProfileId: builder.query({
             query: (userId) => {
                 const url = userId ? `user/userProfile/${userId}` : 'user/userProfile';
                 return createRequest(url, 'GET');
             },
-            providesTags:['Users']
+            providesTags: ['Users']
         }),
-        
+        changeUserImage: builder.mutation({
+            query: (newImage) => createRequest('user/userImage', 'PUT', { image: newImage }),
+            invalidatesTags: ['Users']
+        })
     }),
 });
 
 export const {
     useUserProfileQuery,
-    useUserProfileIdQuery
+    useUserProfileIdQuery,
+    useChangeUserImageMutation // Hook to use the mutation
 } = allUsers;

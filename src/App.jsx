@@ -17,7 +17,6 @@ import AddProject from "./components/AddProject/AddProject";
 import UserProfile from "./components/User/UserProfile";
 import General from "./components/User/General";
 import Gallary from "./components/User/Gallary";
-import SocialLinks from "./components/User/SocialLinks";
 import Connection from "./components/User/Connection";
 import Info from "./components/User/Info";
 import ChangePass from "./components/User/ChangePass";
@@ -83,7 +82,6 @@ function App() {
               { path: 'general', element: <General  /> },
               { path: 'gallary', element: <Gallary /> },
               { path: 'connection', element: <Connection /> },
-              { path: 'social', element: <SocialLinks /> },
               { path: 'info', element: <Info /> },
               { path: 'changepass', element: <ChangePass /> },
             ]
@@ -91,7 +89,7 @@ function App() {
       ]
     }
   ]);
-
+  
   return <RouterProvider router={routers}></RouterProvider>;
 }
 

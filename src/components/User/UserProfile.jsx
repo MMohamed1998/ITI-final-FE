@@ -11,12 +11,12 @@ function UserProfile() {
     
     <div className="container light-style flex-grow-1  container-p-y  py-2 bachground ">
      <div className="card ">
-    <div className="row no-gutters row-bordered row-border-light    ">
-    <div className="col-2">
+    <div className="row  row-bordered row-border-light    ">
+    <div className="col-2 ">
     <UserBar/>
     </div>
-    <div className="col-8">
-        <div className="tab-content">
+    <div className="col-10">
+        <div className="tab-content  overflow-x-hidden overflow-y-scroll ">
       <Outlet/>
         
       </div>
